@@ -13,4 +13,12 @@ __pycache__
 /weight_files/tensorflow/*
 !/weight_files/tensorflow/.gitkeep
 
+/weight_files/tensorflow/*
+!/weight_files/tensorflow/.gitkeep
+
+/morph_result/*
+!/morph_result/.gitkeep
+
+/save_result/*
+!save_result/.gitkeep
 

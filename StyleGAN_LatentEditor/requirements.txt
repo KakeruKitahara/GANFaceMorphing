@@ -3,6 +3,8 @@ torchvision
 matplotlib
 scipy
 cmake
+opencv-python
 dlib
 tensorflow==1.14.0
 tensorflow-gpu==1.14.0
+natsort
