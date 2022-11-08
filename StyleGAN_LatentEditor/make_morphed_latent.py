@@ -52,7 +52,7 @@ def main():
     latents = alpha*latents_0+(1-alpha)*latents_1
     latents = latents.detach().cpu().numpy()
     np.save("latent_W/x_{0}x{1}.npy".format(basename_0, basename_1), latents)
-    #print("latent_W/{0}_{1}.npy".format(basename_0, basename_1))
+    print("latent_W/{0}_{1}.npy".format(basename_0, basename_1))
 
 
 if __name__ == "__main__":
