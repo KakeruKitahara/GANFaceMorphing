@@ -24,12 +24,7 @@ Dockerを用いて仮想コンテナ上で開発環境を実装する．ファ�
 セットアップで作成したコンテナを起動しているときは[localhost:8082](http://localhost:8082)においてjupyter notebookにアクセスできますので，そちらから参照する．
 
 ## 使用方法
-
-### StyleGAN_LatentEditor
-- 作成中
-
-### StyleGAN2
-- 作成中
+  docker起動し，各々の`main.ipynb`をjupyter nootbookなどで参照すること．
 
 ## Docker環境
 Dockerで実装した環境をここに記す．
