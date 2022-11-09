@@ -1,0 +1,11 @@
+/.stylegan2-cache/
+/__pycache__/
+/.ipynb_checkpoints/
+
+/my/
+
+VGG16_Zhang_PERCEPTUAL
+
+stylegan2-ffhq-config-f.pkl
+
+!.gitkeep
