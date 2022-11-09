@@ -1,2 +1,0 @@
-python make_morphed_latent.py --latent_file1 latent_W/DI.npy --latent_file2 latent_W/HA.npy --folder latent_W/
-python make_image.py --latent_file1 latent_W/DI_HA.npy --folder latent_W/

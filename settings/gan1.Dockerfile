@@ -6,7 +6,8 @@ RUN apt-get update
 RUN apt-get install -y git \
   python3 \
   python3-pip \
-  curl
+  curl \
+  cmake
 
 RUN update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 30 && \
 update-alternatives --install /usr/bin/python python /usr/bin/python3 30

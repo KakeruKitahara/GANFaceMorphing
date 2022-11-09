@@ -20,7 +20,7 @@ do
         fi
 
         cnt=`expr $cnt + 1`
-        if [ $cnt -eq 3 ]; then
+        if [ $cnt -eq 2 ]; then
             cnt=0
             break
         fi
@@ -28,10 +28,10 @@ do
 
 
     cnt2=`expr $cnt2 + 1`
-    if [ $cnt2 -eq 3 ]; then
+    if [ $cnt2 -eq 2 ]; then
         break
     fi
 done
 
 
-# 3 x 2 通り．
+# 2 x 1 通り．
