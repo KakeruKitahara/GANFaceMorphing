@@ -21,4 +21,3 @@ __pycache__
 
 /save_result/*
 !save_result/.gitkeep
-

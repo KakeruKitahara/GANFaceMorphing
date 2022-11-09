@@ -44,9 +44,8 @@ def main():
     latents_0 = torch.tensor(latents_0).to(device)
     latents_1 = torch.tensor(latents_1).to(device)
 
-#   for i in range(100):
-#        alpha = (1/100)*i
-    itr = 30
+# ここでフレーム数を変更できる．
+    itr = 30 # default : 30
     for i in range(1, itr-1):
         alpha = (1/(itr-1))*i
         latents = alpha*latents_0+(1-alpha)*latents_1
