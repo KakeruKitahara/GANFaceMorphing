@@ -1,23 +1,10 @@
 __pycache__
 .ipynb_checkpoints
 
-/morph_result/encode1/*
-!morph_result/encode1/.gitkeep
+morph_result
+save_image
+weight_files
+morph_result
+save_result
 
-/save_image/encode1/*
-!/save_image/encode1/.gitkeep
-
-/weight_files/pytorch/*
-!/weight_files/pytorch/.gitkeep
-
-/weight_files/tensorflow/*
-!/weight_files/tensorflow/.gitkeep
-
-/weight_files/tensorflow/*
-!/weight_files/tensorflow/.gitkeep
-
-/morph_result/*
-!/morph_result/.gitkeep
-
-/save_result/*
-!save_result/.gitkeep
+!.gitkeep
