@@ -39,15 +39,21 @@ Dockerで実装した環境をここに記す．
 ```
 OS : ubuntu18.04
 CUDA : 10.0
-cuDNN : 7.0
+cuDNN : 7.6.5.32
 pytorch : 1.10.1
 torchvision : 0.11.2
 tensorflow, tensorflow-gpu : 1.14.0
 ```
 
 ### StyleGAN2
-- 作成中
-
+```
+OS : ubuntu18.04
+CUDA : 10.1
+cuDNN : 7.6.5.32
+pytorch : 1.10.2
+torchvision : 0.9.1
+tensorflow, tensorflow-gpu : 2.3.0
+```
 ## クレジット
 - 作成中
 

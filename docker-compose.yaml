@@ -20,3 +20,22 @@ services:
           devices:
             - driver: nvidia
               capabilities: [gpu]
+  gan2:
+    build:
+      context: .
+      dockerfile: settings/gan2.Dockerfile
+    container_name: ganmorph2
+    tty: true
+    volumes:
+      - type: bind
+        source: StyleGAN2
+        target: /root/work
+    ports:
+      - "8082:8888"
+    command: jupyter-lab --ip 0.0.0.0 --allow-root --NotebookApp.token=''
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [gpu]

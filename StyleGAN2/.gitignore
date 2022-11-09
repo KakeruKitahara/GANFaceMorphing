@@ -6,6 +6,8 @@
 
 VGG16_Zhang_PERCEPTUAL
 
+LANDMARKS_MODEL
+
 stylegan2-ffhq-config-f.pkl
 
 !.gitkeep
