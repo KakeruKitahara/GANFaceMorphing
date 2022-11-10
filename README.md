@@ -55,8 +55,8 @@ torchvision : 0.9.1
 tensorflow, tensorflow-gpu : 2.3.0
 ```
 ## クレジット
-- 作成中
-
+- [StyleGAN_LatentEditor](https://github.com/pacifinapacific/StyleGAN_LatentEditor)
+- [stylegan](https://github.com/NVlabs/stylegan)
 ## 免責
 - 作成中
 

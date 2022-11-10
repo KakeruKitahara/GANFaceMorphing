@@ -2,8 +2,8 @@
 
 # 2. 潜在変数からnpyファイルを出力．
 
-FILES=~/work/img_color/*.png
-FORDER=img_color/
+FILES=~/work/al_img/*.png
+FORDER=al_img/
 
 cnt=0
 for path in $FILES
