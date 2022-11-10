@@ -1,9 +1,6 @@
 # 高品質な表情モーフィング生成とリーマン計量の直接推定による高次元表情空間の構築
 洋明さんのプログラムをDocker環境で実装した．現在は改良版として[SemanticStyleGANで高密度高品質モーフィング生成](https://github.com/KakeruKitahara/HighDensityFaceMorphing)を実装する．
 
-## 概要
-- 作成中
-
 ## dockerセットアップ
 Dockerを用いて仮想コンテナ上で開発環境を実装する．ファインチューニングにgpuを使うので事前に自分のグラボのドライバを入れておくこと．並列計算処理などをするCUDA，cuDNNなどをダウンロードする必要はない．
 
@@ -54,12 +51,11 @@ pytorch : 1.10.2
 torchvision : 0.9.1
 tensorflow, tensorflow-gpu : 2.3.0
 ```
+
+## 免責
+生じた如何なる損害や修正や更新も責任を負いません． 使用する際は自己責任でお願いします．
+
 ## クレジット
 - [StyleGAN_LatentEditor](https://github.com/pacifinapacific/StyleGAN_LatentEditor)
 - [stylegan](https://github.com/NVlabs/stylegan)
 - [stylegan2](https://github.com/NVlabs/stylegan2)
-## 免責
-- 作成中
-
-## Docker環境
-- 作成中
