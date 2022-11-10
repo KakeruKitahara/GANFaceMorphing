@@ -1,13 +1,22 @@
-/.stylegan2-cache/
-/__pycache__/
-/.ipynb_checkpoints/
+.stylegan2-cache
+__pycache__
+.ipynb_checkpoints
 
-/my/
+# /my/dateset/*
+# !/my/dataset/.gitkeep
+
+/my/traning/*
+!/my/traning/.gitkeep
+/my/gif/*
+!/my/gif/.gitkeep
+/my/real_images/*
+!/my/real_images/.gitkeep
+/my/transitions/*
+!/my/transitions/.gitkeep
+
 
 VGG16_Zhang_PERCEPTUAL
 
 LANDMARKS_MODEL
 
 stylegan2-ffhq-config-f.pkl
-
-!.gitkeep
