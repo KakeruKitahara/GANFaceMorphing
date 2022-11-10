@@ -57,6 +57,7 @@ tensorflow, tensorflow-gpu : 2.3.0
 ## クレジット
 - [StyleGAN_LatentEditor](https://github.com/pacifinapacific/StyleGAN_LatentEditor)
 - [stylegan](https://github.com/NVlabs/stylegan)
+- [stylegan2](https://github.com/NVlabs/stylegan2)
 ## 免責
 - 作成中
 

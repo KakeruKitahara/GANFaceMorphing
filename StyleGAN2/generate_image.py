@@ -5,7 +5,6 @@ import os
 import PIL.Image
 import sys
 import bz2
-#from keras.utils import get_file
 import tensorflow
 import dlib
 import argparse
@@ -135,7 +134,7 @@ def unpack_bz2(src_path):
 def project_real_images(num_images,images_dir):
     images_path = os.listdir(images_dir)
     
-    network_pkl = 'stylegan2-ffhq-config-f.pkl'
+    network_pkl = './networks/stylegan2-ffhq-config-f.pkl'
     dataset_name = 'dataset'  
     data_dir = 'my'  
     num_snapshots = 5
@@ -185,7 +184,7 @@ def project_real_images(num_images,images_dir):
 
 # ------------- 2つのベクトル間を補完するアニメーションの作成 -------
 def generate_gif(vec_syn, idx):
-    network_pkl = 'stylegan2-ffhq-config-f.pkl'  
+    network_pkl = './networks/stylegan2-ffhq-config-f.pkl'  
     
     _G, _D, Gs = pretrained_networks.load_networks(network_pkl)
     noise_vars = [var for name, var in Gs.components.synthesis.vars.items() if name.startswith('noise')]
@@ -216,7 +215,7 @@ def generate_gif(vec_syn, idx):
 def generate_morph(VEC1_DIR,VEC2_DIR,itr_num,MORPH_DIR):
     vec1 = np.load(VEC1_DIR)
     vec2 = np.load(VEC2_DIR)
-    network_pkl = 'stylegan2-ffhq-config-f.pkl'  
+    network_pkl = './networks/stylegan2-ffhq-config-f.pkl'  
     
     _G, _D, Gs = pretrained_networks.load_networks(network_pkl)
     noise_vars = [var for name, var in Gs.components.synthesis.vars.items() if name.startswith('noise')]
@@ -247,7 +246,7 @@ def generate_morph(VEC1_DIR,VEC2_DIR,itr_num,MORPH_DIR):
 def generate_image(VEC_DIR,OUT_DIR):
     vec = np.load(VEC_DIR)
 
-    network_pkl = 'stylegan2-ffhq-config-f.pkl'      
+    network_pkl = './networks/stylegan2-ffhq-config-f.pkl'      
     _G, _D, Gs = pretrained_networks.load_networks(network_pkl)
     noise_vars = [var for name, var in Gs.components.synthesis.vars.items() if name.startswith('noise')]
 
@@ -285,7 +284,7 @@ def display_pic(folder):
 # ------------------ ベクトルの画像化 ---------------
 def display(vec_syn):
   
-    network_pkl = 'stylegan2-ffhq-config-f.pkl'  
+    network_pkl = './networks/stylegan2-ffhq-config-f.pkl'  
     
     _G, _D, Gs = pretrained_networks.load_networks(network_pkl)
     noise_vars = [var for name, var in Gs.components.synthesis.vars.items() if name.startswith('noise')]
@@ -307,7 +306,7 @@ def display(vec_syn):
     plt.show()
     plt.close()
     
-VEC1_DIR = './my/vector/vec_syn_AN.npy'
+VEC1_DIR = './my/vector/vec_syn_AN.npy' 
 VEC2_DIR = './my/vector/vec_syn_DI.npy'
 MORPH_DIR = './my/transitions'
 
