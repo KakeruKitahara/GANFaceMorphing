@@ -2,6 +2,9 @@
 __pycache__
 .ipynb_checkpoints
 
+# /my/dateset/*
+# !/my/dataset/.gitkeep
+
 /my/traning/*
 !/my/traning/.gitkeep
 /my/gif/*
