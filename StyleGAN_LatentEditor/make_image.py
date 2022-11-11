@@ -45,7 +45,7 @@ def main():
     synth_img = (synth_img + 1.0) / 2.0
     latent_name = os.path.splitext(args.latent_file1)
     save_image(synth_img.clamp(0, 1), "{}.png".format(latent_name[0]))
-    # print(args.folder+"{}.png".format(latent_name))
+    print("{}.png".format(latent_name[0]))
 
 
 if __name__ == "__main__":
