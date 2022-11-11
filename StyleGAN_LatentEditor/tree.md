@@ -18,9 +18,9 @@
 |-- image_rgbtogray.py* : カラーからグレースケール化
 |-- main.ipynb* : 本研究のnote
 |-- make_added_morphed_latents.bat*
-|-- make_image.bat* : ???
-|-- make_image.py* : ???
-|-- make_morphed_latent.py* : ???
+|-- make_image.py* : 潜在変数(npy)から画像を復元
+|-- make_image.sh*
+|-- make_morphed_latent.py* : 顔Aと顔Bの中間顔の潜在変数(npy)を作成
 |-- make_morphed_latents.sh*
 |-- make_morphgif.py* : 結合してgif
 |-- make_morphing.sh*
@@ -29,7 +29,6 @@
 |-- requirements.txt* : パッケージリストを記載しているファイル
 |-- stylegan_layers.py* : module
 |-- tree.md* : ファイル構成
-
 `-- weight_convert.py* : 学習済みモデルの変換
 
 ```
