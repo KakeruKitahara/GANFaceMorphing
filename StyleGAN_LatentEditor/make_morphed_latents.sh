@@ -380,3 +380,47 @@ python make_morphed_latent.py --latent_file1 latent_W/SA.npy --latent_file2 late
 python make_morphed_latent.py --latent_file1 latent_W/SU.npy --latent_file2 latent_W/UFAU02.npy --folder latent_W/
 python make_morphed_latent.py --latent_file1 latent_W/SU.npy --latent_file2 latent_W/UFAU04.npy --folder latent_W/
 python make_morphed_latent.py --latent_file1 latent_W/UFAU02.npy --latent_file2 latent_W/UFAU04.npy --folder latent_W/
+
+# ---- make_added_morphed_latents ---
+
+python make_morphed_latent.py --latent_file1 latent_W/AN.npy --latent_file2 latent_W/LFAU12.npy --folder latent_W/
+python make_morphed_latent.py --latent_file1 latent_W/AN.npy --latent_file2 latent_W/LFAU20.npy --folder latent_W/
+python make_morphed_latent.py --latent_file1 latent_W/DI.npy --latent_file2 latent_W/LFAU12.npy --folder latent_W/
+python make_morphed_latent.py --latent_file1 latent_W/FE.npy --latent_file2 latent_W/LFAU15.npy --folder latent_W/
+python make_morphed_latent.py --latent_file1 latent_W/FE.npy --latent_file2 latent_W/LFAU20.npy --folder latent_W/
+python make_morphed_latent.py --latent_file1 latent_W/FE.npy --latent_file2 latent_W/LFAU25.npy --folder latent_W/
+python make_morphed_latent.py --latent_file1 latent_W/LFAU12L.npy --latent_file2 latent_W/LFAU17.npy --folder latent_W/
+python make_morphed_latent.py --latent_file1 latent_W/LFAU12L.npy --latent_file2 latent_W/LFAU20.npy --folder latent_W/
+python make_morphed_latent.py --latent_file1 latent_W/LFAU12L.npy --latent_file2 latent_W/LFAU25.npy --folder latent_W/
+python make_morphed_latent.py --latent_file1 latent_W/LFAU12R.npy --latent_file2 latent_W/LFAU20.npy --folder latent_W/
+python make_morphed_latent.py --latent_file1 latent_W/LFAU12R.npy --latent_file2 latent_W/LFAU24.npy --folder latent_W/
+python make_morphed_latent.py --latent_file1 latent_W/LFAU12R.npy --latent_file2 latent_W/LFAU25.npy --folder latent_W/
+python make_morphed_latent.py --latent_file1 latent_W/LFAU12R.npy --latent_file2 latent_W/LFAU34.npy --folder latent_W/
+python make_morphed_latent.py --latent_file1 latent_W/LFAU12R.npy --latent_file2 latent_W/SA.npy --folder latent_W/
+python make_morphed_latent.py --latent_file1 latent_W/LFAU12R.npy --latent_file2 latent_W/SU.npy --folder latent_W/
+python make_morphed_latent.py --latent_file1 latent_W/LFAU12R.npy --latent_file2 latent_W/UFAU04.npy --folder latent_W/
+python make_morphed_latent.py --latent_file1 latent_W/LFAU12.npy --latent_file2 latent_W/LFAU25.npy --folder latent_W/
+python make_morphed_latent.py --latent_file1 latent_W/LFAU12.npy --latent_file2 latent_W/LFAU34.npy --folder latent_W/
+python make_morphed_latent.py --latent_file1 latent_W/LFAU12.npy --latent_file2 latent_W/UFAU04.npy --folder latent_W/
+python make_morphed_latent.py --latent_file1 latent_W/LFAU15.npy --latent_file2 latent_W/LFAU16.npy --folder latent_W/
+python make_morphed_latent.py --latent_file1 latent_W/LFAU15.npy --latent_file2 latent_W/LFAU17.npy --folder latent_W/
+python make_morphed_latent.py --latent_file1 latent_W/LFAU15.npy --latent_file2 latent_W/LFAU20.npy --folder latent_W/
+python make_morphed_latent.py --latent_file1 latent_W/LFAU15.npy --latent_file2 latent_W/LFAU25.npy --folder latent_W/
+python make_morphed_latent.py --latent_file1 latent_W/LFAU15.npy --latent_file2 latent_W/UFAU02.npy --folder latent_W/
+python make_morphed_latent.py --latent_file1 latent_W/LFAU16.npy --latent_file2 latent_W/UFAU02.npy --folder latent_W/
+python make_morphed_latent.py --latent_file1 latent_W/LFAU17.npy --latent_file2 latent_W/LFAU20.npy --folder latent_W/
+python make_morphed_latent.py --latent_file1 latent_W/LFAU17.npy --latent_file2 latent_W/LFAU24.npy --folder latent_W/
+python make_morphed_latent.py --latent_file1 latent_W/LFAU17.npy --latent_file2 latent_W/LFAU25.npy --folder latent_W/
+python make_morphed_latent.py --latent_file1 latent_W/LFAU17.npy --latent_file2 latent_W/UFAU02.npy --folder latent_W/
+python make_morphed_latent.py --latent_file1 latent_W/LFAU20.npy --latent_file2 latent_W/LFAU25.npy --folder latent_W/
+python make_morphed_latent.py --latent_file1 latent_W/LFAU20.npy --latent_file2 latent_W/LFAU34.npy --folder latent_W/
+python make_morphed_latent.py --latent_file1 latent_W/LFAU20.npy --latent_file2 latent_W/UFAU02.npy --folder latent_W/
+python make_morphed_latent.py --latent_file1 latent_W/LFAU24.npy --latent_file2 latent_W/LFAU28.npy --folder latent_W/
+python make_morphed_latent.py --latent_file1 latent_W/LFAU24.npy --latent_file2 latent_W/UFAU02.npy --folder latent_W/
+python make_morphed_latent.py --latent_file1 latent_W/LFAU24.npy --latent_file2 latent_W/UFAU04.npy --folder latent_W/
+python make_morphed_latent.py --latent_file1 latent_W/LFAU25.npy --latent_file2 latent_W/SU.npy --folder latent_W/
+python make_morphed_latent.py --latent_file1 latent_W/LFAU25.npy --latent_file2 latent_W/UFAU02.npy --folder latent_W/
+python make_morphed_latent.py --latent_file1 latent_W/LFAU28.npy --latent_file2 latent_W/UFAU02.npy --folder latent_W/
+python make_morphed_latent.py --latent_file1 latent_W/LFAU34.npy --latent_file2 latent_W/NE.npy --folder latent_W/
+python make_morphed_latent.py --latent_file1 latent_W/SU.npy --latent_file2 latent_W/UFAU02.npy --folder latent_W/
+python make_morphed_latent.py --latent_file1 latent_W/UFAU02.npy --latent_file2 latent_W/UFAU04.npy --folder latent_W/
