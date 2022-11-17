@@ -4,7 +4,7 @@ services:
   gan1:
     build:
       context: .
-      dockerfile: settings/gan1.Dockerfile
+      dockerfile: Dockerfile
     container_name: ganmorph1
     tty: true
     volumes:
@@ -23,7 +23,7 @@ services:
   gan2:
     build:
       context: .
-      dockerfile: settings/gan2.Dockerfile
+      dockerfile: Dockerfile
     container_name: ganmorph2
     tty: true
     volumes:

@@ -5,8 +5,8 @@ __pycache__
 # /my/dateset/*
 # !/my/dataset/.gitkeep
 
-/my/traning/*
-!/my/traning/.gitkeep
+/my/vector/*
+!/my/vector/.gitkeep
 /my/gif/*
 !/my/gif/.gitkeep
 /my/real_images/*
@@ -14,12 +14,7 @@ __pycache__
 /my/transitions/*
 !/my/transitions/.gitkeep
 
+/my/pic
+
 /networks/*
 !/networks/.gitkeep
-
-
-VGG16_Zhang_PERCEPTUAL
-
-LANDMARKS_MODEL
-
-stylegan2-ffhq-config-f.pkl

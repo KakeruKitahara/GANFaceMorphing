@@ -20,8 +20,9 @@ z2 = z[1]
 
 inputs = []
 steps = 10
-for i in range(10):
+for i in range(steps): # default 10
     inputs.append(z1 + (z1 - z2) * i / steps)
+
 
 for i, latents in enumerate(inputs):
     images = generator(dlatents=tf.constant([latents], tf.float32))['images']

@@ -47,9 +47,8 @@ tensorflow, tensorflow-gpu : 1.14.0
 OS : ubuntu18.04
 CUDA : 10.1
 cuDNN : 7.6.5.32
-pytorch : 1.10.2
+pytorch : 1.8.1
 torchvision : 0.9.1
-tensorflow, tensorflow-gpu : 2.3.0
 ```
 
 ## 免責

@@ -17,109 +17,32 @@ import projector
 import pretrained_networks
 from training import dataset
 from training import misc
+import argparse
 
-# --------- ランドマーク検出 -------------
-class LandmarksDetector:
-    def __init__(self, predictor_model_path):
-        """
-        :param predictor_model_path: path to shape_predictor_68_face_landmarks.dat file
-        """
-        self.detector = dlib.get_frontal_face_detector() # cnn_face_detection_model_v1 also can be used
-        self.shape_predictor = dlib.shape_predictor(predictor_model_path)
 
-    def get_landmarks(self, image):
-        img = dlib.load_rgb_image(image)
-        dets = self.detector(img, 1)
 
-        for detection in dets:
-            face_landmarks = [(item.x, item.y) for item in self.shape_predictor(img, detection).parts()]
-            yield face_landmarks
+def main() :
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--iter', default=30000, help='step times', type=int)
+    args = parser.parse_args()
 
-# ---------- 顔画像の切り出し --------------            
-def image_align(src_file, dst_file, face_landmarks, output_size=1024, transform_size=4096, enable_padding=True):
-        # Align function from FFHQ dataset pre-processing step
-        # https://github.com/NVlabs/ffhq-dataset/blob/master/download_ffhq.py
-        src_file
-        dst_file 
-        face_landmarks
-        output_size=1024 
-        transform_size=4096 
-        enable_padding=True
-            
-        lm = np.array(face_landmarks)
-        lm_chin          = lm[0  : 17]  # left-right
-        lm_eyebrow_left  = lm[17 : 22]  # left-right
-        lm_eyebrow_right = lm[22 : 27]  # left-right
-        lm_nose          = lm[27 : 31]  # top-down
-        lm_nostrils      = lm[31 : 36]  # top-down
-        lm_eye_left      = lm[36 : 42]  # left-clockwise
-        lm_eye_right     = lm[42 : 48]  # left-clockwise
-        lm_mouth_outer   = lm[48 : 60]  # left-clockwise
-        lm_mouth_inner   = lm[60 : 68]  # left-clockwise
+    # ディレクトリの作成
+    os.makedirs('my/pic', exist_ok=True)
+    os.makedirs('my/vector', exist_ok=True)
 
-        # Calculate auxiliary vectors.
-        eye_left     = np.mean(lm_eye_left, axis=0)
-        eye_right    = np.mean(lm_eye_right, axis=0)
-        eye_avg      = (eye_left + eye_right) * 0.5
-        eye_to_eye   = eye_right - eye_left
-        mouth_left   = lm_mouth_outer[0]
-        mouth_right  = lm_mouth_outer[6]
-        mouth_avg    = (mouth_left + mouth_right) * 0.5
-        eye_to_mouth = mouth_avg - eye_avg
 
-        # Choose oriented crop rectangle.
-        x = eye_to_eye - np.flipud(eye_to_mouth) * [-1, 1]
-        x /= np.hypot(*x)
-        x *= max(np.hypot(*eye_to_eye) * 2.0, np.hypot(*eye_to_mouth) * 1.8)
-        y = np.flipud(x) * [-1, 1]
-        c = eye_avg + eye_to_mouth * 0.1
-        quad = np.stack([c - x - y, c - x + y, c + x + y, c + x - y])
-        qsize = np.hypot(*x) * 2
+    # 顔画像切り出しモデルの読み込み
+    LANDMARKS_MODEL_URL = 'http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2'
+    landmarks_model_path = unpack_bz2(tensorflow.keras.utils.get_file('shape_predictor_68_face_landmarks.dat.bz2', LANDMARKS_MODEL_URL, cache_subdir='temp'))
 
-        # Load in-the-wild image.
-        if not os.path.isfile(src_file):
-            print('\nCannot find source image. Please run "--wilds" before "--align".')
-            return
-        img = PIL.Image.open(src_file)
 
-        # Shrink.
-        shrink = int(np.floor(qsize / output_size * 0.5))
-        if shrink > 1:
-            rsize = (int(np.rint(float(img.size[0]) / shrink)), int(np.rint(float(img.size[1]) / shrink)))
-            img = img.resize(rsize, PIL.Image.ANTIALIAS)
-            quad /= shrink
-            qsize /= shrink
+    #潜在変数の推定
+    ALIGNED_IMAGES_DIR = 'my/pic'
+    image_num = sum(os.path.isfile(os.path.join(ALIGNED_IMAGES_DIR, name)) for name in os.listdir(ALIGNED_IMAGES_DIR))
+    vec_syn = project_real_images(image_num, ALIGNED_IMAGES_DIR, args.iter)  
 
-        # Crop.
-        border = max(int(np.rint(qsize * 0.1)), 3)
-        crop = (int(np.floor(min(quad[:,0]))), int(np.floor(min(quad[:,1]))), int(np.ceil(max(quad[:,0]))), int(np.ceil(max(quad[:,1]))))
-        crop = (max(crop[0] - border, 0), max(crop[1] - border, 0), min(crop[2] + border, img.size[0]), min(crop[3] + border, img.size[1]))
-        if crop[2] - crop[0] < img.size[0] or crop[3] - crop[1] < img.size[1]:
-            img = img.crop(crop)
-            quad -= crop[0:2]
-
-        # Pad.
-        pad = (int(np.floor(min(quad[:,0]))), int(np.floor(min(quad[:,1]))), int(np.ceil(max(quad[:,0]))), int(np.ceil(max(quad[:,1]))))
-        pad = (max(-pad[0] + border, 0), max(-pad[1] + border, 0), max(pad[2] - img.size[0] + border, 0), max(pad[3] - img.size[1] + border, 0))
-        if enable_padding and max(pad) > border - 4:
-            pad = np.maximum(pad, int(np.rint(qsize * 0.3)))
-            img = np.pad(np.float32(img), ((pad[1], pad[3]), (pad[0], pad[2]), (0, 0)), 'reflect')
-            h, w, _ = img.shape
-            y, x, _ = np.ogrid[:h, :w, :1]
-            mask = np.maximum(1.0 - np.minimum(np.float32(x) / pad[0], np.float32(w-1-x) / pad[2]), 1.0 - np.minimum(np.float32(y) / pad[1], np.float32(h-1-y) / pad[3]))
-            blur = qsize * 0.02
-            img += (scipy.ndimage.gaussian_filter(img, [blur, blur, 0]) - img) * np.clip(mask * 3.0 + 1.0, 0.0, 1.0)
-            img += (np.median(img, axis=(0,1)) - img) * np.clip(mask, 0.0, 1.0)
-            img = PIL.Image.fromarray(np.uint8(np.clip(np.rint(img), 0, 255)), 'RGB')
-            quad += pad[:2]
-
-        # Transform.
-        img = img.transform((transform_size, transform_size), PIL.Image.QUAD, (quad + 0.5).flatten(), PIL.Image.BILINEAR)
-        if output_size < transform_size:
-            img = img.resize((output_size, output_size), PIL.Image.ANTIALIAS)
-
-        # Save aligned image.
-        img.save(dst_file, 'PNG')
+    # 潜在変数の保存
+    np.save('my/vector/vec_syn', vec_syn)
 
 
 # ------------ ファイルの解凍 ---------------        
@@ -132,13 +55,13 @@ def unpack_bz2(src_path):
 
 
 # ------------  潜在変数(ベクトル)の探索　------------
-def project_real_images(num_images,images_dir):
+def project_real_images(num_images,images_dir, arg_step):
     images_path = os.listdir(images_dir)
     
-    network_pkl = 'stylegan2-ffhq-config-f.pkl'
+    network_pkl = 'networks/stylegan2-ffhq-config-f.pkl'
     dataset_name = 'dataset'  
     data_dir = 'my'  
-    num_snapshots = 5
+    num_snapshots = 5 # 100 / 5 = 20%
 
     print('Loading networks from "%s"...' % network_pkl)
     _G, _D, Gs = pretrained_networks.load_networks(network_pkl)
@@ -156,12 +79,15 @@ def project_real_images(num_images,images_dir):
         images = misc.adjust_dynamic_range(images, [0, 255], [-1, 1])
         
         targets=images
-        png_prefix='./my/real_images/image'+str(image_idx)
+    
         num_snapshots=num_snapshots
-        
         image_base_name = os.path.splitext(images_path[image_idx])[0]
+        png_prefix='my/real_images/process_'+str(image_base_name) + '/'
+        os.makedirs(png_prefix, exist_ok=True)
+
+        proj.num_steps = arg_step
         snapshot_steps = set(proj.num_steps - np.linspace(0, proj.num_steps, num_snapshots, endpoint=False, dtype=int))
-        misc.save_image_grid(targets, image_base_name + '_target.png', drange=[-1,1])
+        misc.save_image_grid(targets, png_prefix + image_base_name + '_target.png', drange=[-1,1])
         proj.start(targets)
         
 
@@ -169,8 +95,7 @@ def project_real_images(num_images,images_dir):
             print('\r%d / %d ... ' % (proj.get_cur_step(), proj.num_steps), end='', flush=True)
             proj.step()
             if proj.get_cur_step() in snapshot_steps:
-                #misc.save_image_grid(proj.get_images(), png_prefix + 'step%04d.png' % proj.get_cur_step(), drange=[-1,1])
-                misc.save_image_grid(proj.get_images(), image_base_name + '_step_%04d.png' % proj.get_cur_step(), drange=[-1,1])
+                misc.save_image_grid(proj.get_images(), png_prefix + image_base_name + '_step_%04d.png' % proj.get_cur_step(), drange=[-1,1])
             if proj.get_cur_step() == proj.num_steps:  
                 vec = proj.get_dlatents()
                 np.save('my/vector/vec_syn_{}'.format(image_base_name), vec) 
@@ -183,138 +108,4 @@ def project_real_images(num_images,images_dir):
 
     return vec_syn
 
-# ------------- 2つのベクトル間を補完するアニメーションの作成 -------
-def generate_gif(vec_syn, idx):
-    network_pkl = 'stylegan2-ffhq-config-f.pkl'  
-    
-    _G, _D, Gs = pretrained_networks.load_networks(network_pkl)
-    noise_vars = [var for name, var in Gs.components.synthesis.vars.items() if name.startswith('noise')]
-
-    Gs_syn_kwargs = dnnlib.EasyDict()
-    Gs_syn_kwargs.output_transform = dict(func=tflib.convert_images_to_uint8, nchw_to_nhwc=True)
-    Gs_syn_kwargs.randomize_noise = True 
-    Gs_syn_kwargs.truncation_psi = 0.5
-
-    image_gif = []
-    image_gif_256 = []
-    os.makedirs('my/gif', exist_ok=True)
-    for j in range(len(idx)-1):
-        for i in range(40):
-            vec = vec_syn[idx[j]]+(vec_syn[idx[j+1]]-vec_syn[idx[j]])*i/39
-            vec = vec.reshape(1, 18, 512)
-            images =  Gs.components.synthesis.run(vec, **Gs_syn_kwargs) 
-            image_one = PIL.Image.fromarray(images[0], 'RGB')
-            image_gif.append(image_one)
-            image_gif_256.append(image_one.resize((256,256))) 
-
-    image_gif[0].save('./my/gif/anime.gif', save_all=True, append_images=image_gif[1:],
-                      duration=100, loop=0)   
-    image_gif_256[0].save('./my/gif/anime_256.gif', save_all=True, append_images=image_gif_256[1:],
-                      duration=100, loop=0) 
-
-# ------------　 フォルダー内の画像を表示　--------------
-import matplotlib.pyplot as plt
-from PIL import Image
-import glob
-def display_pic(folder):
-    fig = plt.figure(figsize=(30, 40))
-    files = glob.glob(folder)
-    files.sort()
-    images=[]
-    for i in range(len(files)):
-        img = Image.open(files[i])    
-        images = np.asarray(img)
-        ax = fig.add_subplot(10, 10, i+1, xticks=[], yticks=[])
-        image_plt = np.array(images)
-        ax.imshow(image_plt)
-        ax.set_xlabel(str(i), fontsize=20)               
-    plt.show()
-    plt.close()  
-
-# ------------------ ベクトルの画像化 ---------------
-def display(vec_syn):
-  
-    network_pkl = 'stylegan2-ffhq-config-f.pkl'  
-    
-    _G, _D, Gs = pretrained_networks.load_networks(network_pkl)
-    noise_vars = [var for name, var in Gs.components.synthesis.vars.items() if name.startswith('noise')]
-
-    Gs_syn_kwargs = dnnlib.EasyDict()
-    Gs_syn_kwargs.output_transform = dict(func=tflib.convert_images_to_uint8, nchw_to_nhwc=True)
-    Gs_syn_kwargs.randomize_noise = True 
-    Gs_syn_kwargs.truncation_psi = 0.5
-
-    fig = plt.figure(figsize=(30, 40))   
-    for i in range(len(vec_syn)):
-        vec = vec_syn[i].reshape(1,18,512)
-        image =  Gs.components.synthesis.run(vec, **Gs_syn_kwargs)        
-        PIL.Image.fromarray(image[0], 'RGB')   
-        ax = fig.add_subplot(10, 10, i+1, xticks=[], yticks=[])
-        image_plt = np.array(image[0])
-        ax.imshow(image_plt)
-        ax.set_xlabel(str(i), fontsize=20)               
-    plt.show()
-    plt.close()
-    
-    
-
-
-# make dirctory
-os.makedirs('my/pic', exist_ok=True)
-
-
-# 顔画像切り出しモデルの読み込み
-LANDMARKS_MODEL_URL = 'http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2'
-#LANDMARKS_MODEL_URL = './LANDMARKS_MODEL/shape_predictor_68_face_landmarks.dat.bz2'
-landmarks_model_path = unpack_bz2(tensorflow.keras.utils.get_file('shape_predictor_68_face_landmarks.dat.bz2', LANDMARKS_MODEL_URL, cache_subdir='temp'))
-
-
-# 顔画像の切り出し
-RAW_IMAGES_DIR = 'sample/pic'
-ALIGNED_IMAGES_DIR = 'my/pic'
-
-'''
-landmarks_detector = LandmarksDetector(landmarks_model_path)
-for img_name in os.listdir(RAW_IMAGES_DIR):
-    raw_img_path = os.path.join(RAW_IMAGES_DIR, img_name)
-    for i, face_landmarks in enumerate(landmarks_detector.get_landmarks(raw_img_path), start=1):
-        #face_img_name = '%s_%02d.png' % (os.path.splitext(img_name)[0], i)
-        image_base_name = os.path.splitext(img_name)[0]
-        face_img_name = '{0}.png'.format(image_base_name)
-        aligned_face_path = os.path.join(ALIGNED_IMAGES_DIR, face_img_name)
-        image_align(raw_img_path, aligned_face_path, face_landmarks)
-        
-#display_pic('./my/pic/*.*')
-
-
-#python dataset_tool.py create_from_images ./my/dataset ./my/pic を行う
-import dataset_tool
-print('!python dataset_tool.py create_from_images ./my/dataset ./my/pic')
-dataset_tool.execute_cmdline(['dataset_tool.py', './my/dataset', './my/pic'])
-
-'''
-
-# 探索した潜在変数の保存
-os.makedirs('my/vector', exist_ok=True)
-
-
-#潜在変数の推定
-image_num = sum(os.path.isfile(os.path.join(ALIGNED_IMAGES_DIR, name)) for name in os.listdir(ALIGNED_IMAGES_DIR))
-vec_syn = project_real_images(image_num, ALIGNED_IMAGES_DIR)  # ()内はマルチ解像度のデータセットを作成した時の画像枚数
-#display_pic('./my/pic/*.*')  # ターゲット画像の表示
-#display(vec_syn)  # 探索した潜在変数によって生成した画像
-
-
-# 探索した潜在変数の保存
-np.save('my/vector/vec_syn', vec_syn)
-
-'''
-# 探索した潜在変数の読み込み
-#vec_syn1 = np.load('my/vector/vec_syn1.npy')
-#vec_syn2 = np.load('my/vector/vec_syn2.npy')
-vec_syn = np.load('my/vector/vec_syn.npy')
-
-#from IPython.display import Image
-generate_gif(vec_syn,[0,1])  # 潜在変数を1番目→0番目→3番目へアニメーション
-#Image('./my/gif/anime_256.gif', format='png')
-'''
+main()
