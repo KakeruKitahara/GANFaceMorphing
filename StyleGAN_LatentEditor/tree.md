@@ -1,7 +1,7 @@
 ファイル構成をここに示す．
 
 ```
-|-- dnnlib/ : StyleGAN1
+|-- dnnlib/ : dlib
 |-- img/ : 入力画像保管
 |-- img_color/ : カラー化した画像を保管
 |-- latent_W/ : 潜在変数を保管
