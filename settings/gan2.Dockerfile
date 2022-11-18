@@ -17,7 +17,7 @@ RUN apt-get update \
 RUN update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 30 \
   && update-alternatives --install /usr/bin/python python /usr/bin/python3 30
 
-COPY StyleGAN_LatentEditor/requirements.txt .
+COPY StyleGAN2/requirements.txt .
 
 RUN pip install --upgrade pip && \
   pip install \

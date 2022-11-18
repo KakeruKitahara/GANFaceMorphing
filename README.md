@@ -45,10 +45,11 @@ tensorflow, tensorflow-gpu : 1.14.0
 ### StyleGAN2
 ```
 OS : ubuntu18.04
-CUDA : 10.1
+CUDA : 10.0
 cuDNN : 7.6.5.32
-pytorch : 1.8.1
-torchvision : 0.9.1
+pytorch : 1.10.1
+torchvision : 0.11.2
+tensorflow, tensorflow-gpu : 1.15.3
 ```
 
 ## 免責
