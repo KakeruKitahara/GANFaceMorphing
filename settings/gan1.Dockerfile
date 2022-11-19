@@ -23,7 +23,8 @@ RUN pip install --upgrade pip && \
   jupyterlab \
   autopep8 \
   jupyterlab_code_formatter && \
-  pip install -r requirements.txt
+  pip install -r requirements.txt && \
+  rm -rf ~/.cache/pip
 
 RUN jupyter labextension install @lckr/jupyterlab_variableinspector@3.0.7 &&\
   jupyter labextension install @ryantam626/jupyterlab_code_formatter &&\
