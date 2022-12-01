@@ -12,10 +12,11 @@
 |-- networks/ : 学習済みモデルを保管
 |-- training/ : module
 |-- dataset_tool.py* : module
-|-- image_morphing.py* : 結合してgif
-|-- image_morphing.sh*
+|-- make_morphgif.py* : 結合してgif
+|-- make_morphing.sh*
 |-- main.ipynb : 本研究のnote
 |-- make_morph.py* : 潜在変数でモーフィング
+|-- make_morph.sh*
 |-- pretrained_networks.py* : module
 |-- projector.py* : module
 |-- requirements.txt* : パッケージリストを記載しているファイル

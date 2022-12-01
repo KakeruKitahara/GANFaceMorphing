@@ -1,18 +1,10 @@
 # --- クラスと関数の定義 ---
 import numpy as np
-import scipy.ndimage
 import os
-import PIL.Image
-import sys
 import bz2
-#from keras.utils import get_file
 import tensorflow
-import dlib
 import argparse
 import numpy as np
-import dnnlib
-import dnnlib.tflib as tflib
-import re
 import projector
 import pretrained_networks
 from training import dataset
@@ -23,7 +15,7 @@ import argparse
 
 def main() :
     parser = argparse.ArgumentParser()
-    parser.add_argument('--iter', default=30000, help='step times', type=int)
+    parser.add_argument('--iter', default=40000, help='step times', type=int)
     args = parser.parse_args()
 
     # ディレクトリの作成
@@ -108,4 +100,5 @@ def project_real_images(num_images,images_dir, arg_step):
 
     return vec_syn
 
-main()
+if __name__ == '__main__':
+    main()
