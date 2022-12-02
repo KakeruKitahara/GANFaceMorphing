@@ -41,7 +41,7 @@ def main():
   for i in range(itr_num):
       alpha = i/itr_num
       vec = alpha*vec1+(1-alpha)*vec2
-      vec = vec.reshape(1, 18, 512)
+      # vec = vec.reshape(1, 18, 512)
       images =  Gs.components.synthesis.run(vec, **Gs_syn_kwargs) 
       image_one = PIL.Image.fromarray(images[0], 'RGB')
       morphed_images.append(image_one)
