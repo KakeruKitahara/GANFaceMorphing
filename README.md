@@ -59,7 +59,7 @@ tensorflow, tensorflow-gpu : 1.15.0
 生じた如何なる損害や修正や更新も責任を負いません． 使用する際は自己責任でお願いします．
 
 ## 備考
-stylegan2で作った表情モーフィングはかなり不安定ですので，StyleGAN_LatentEditorでのプログラムを推奨します．
+stylegan2で作った表情モーフィングはかなり不安定ですので，StyleGAN_LatentEditorでのプログラムを推奨する．
 
 ## クレジット
 - [StyleGAN_LatentEditor](https://github.com/pacifinapacific/StyleGAN_LatentEditor)
