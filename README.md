@@ -1,8 +1,8 @@
 # 高品質な表情モーフィング生成とリーマン計量の直接推定による高次元表情空間の構築
-洋明さんのプログラムをDocker環境で実装した．現在は改良版として[SemanticStyleGANで高密度高品質モーフィング生成](https://github.com/KakeruKitahara/HighDensityFaceMorphing)を実装する．
+小林 洋明氏のプログラムをDocker環境で実装した．現在は改良版として[SemanticStyleGANで高密度高品質モーフィング生成](https://github.com/KakeruKitahara/HighDensityFaceMorphing)を実装する．
 
 ## 概要
-- 作成中
+研究内容は https://chuo-u.repo.nii.ac.jp/?action=pages_view_main&active_action=repository_view_main_item_detail&item_id=16677&item_no=1&page_id=13&block_id=21 を参照すること．
 
 ## dockerセットアップ
 Dockerを用いて仮想コンテナ上で開発環境を実装する．ファインチューニングにgpuを使うので事前に自分のグラボのドライバを入れておくこと．並列計算処理などをするCUDA，cuDNNなどをダウンロードする必要はない．
@@ -48,17 +48,20 @@ tensorflow, tensorflow-gpu : 1.14.0
 ### StyleGAN2
 ```
 OS : ubuntu18.04
-CUDA : 10.1
+CUDA : 10.0
 cuDNN : 7.6.5.32
-pytorch : 1.10.2
-torchvision : 0.9.1
-tensorflow, tensorflow-gpu : 2.3.0
+pytorch : 1.10.1
+torchvision : 0.11.2
+tensorflow, tensorflow-gpu : 1.15.0
 ```
-## クレジット
-- 作成中
 
 ## 免責
-- 作成中
+生じた如何なる損害や修正や更新も責任を負いません． 使用する際は自己責任でお願いします．
 
-## Docker環境
-- 作成中
+## 備考
+stylegan2で作った表情モーフィングはかなり不安定ですので，StyleGAN_LatentEditorでのプログラムを推奨する．
+
+## クレジット
+- [StyleGAN_LatentEditor](https://github.com/pacifinapacific/StyleGAN_LatentEditor)
+- [stylegan](https://github.com/NVlabs/stylegan)
+- [stylegan2](https://github.com/NVlabs/stylegan2)

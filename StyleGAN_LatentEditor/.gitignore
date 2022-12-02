@@ -18,3 +18,13 @@ __pycache__
 
 /save_result/*
 !save_result/.gitkeep
+
+# /al_img/*
+# !/al_img/.gitkeep
+
+# /img/*
+# !/img/.gitkeep
+
+# /img_color/*
+# !/img_color/.gitkeep
+
