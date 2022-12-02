@@ -1,5 +1,8 @@
 # 高品質な表情モーフィング生成とリーマン計量の直接推定による高次元表情空間の構築
-洋明さんのプログラムをDocker環境で実装した．現在は改良版として[SemanticStyleGANで高密度高品質モーフィング生成](https://github.com/KakeruKitahara/HighDensityFaceMorphing)を実装する．
+小林 洋明氏のプログラムをDocker環境で実装した．現在は改良版として[SemanticStyleGANで高密度高品質モーフィング生成](https://github.com/KakeruKitahara/HighDensityFaceMorphing)を実装する．
+
+## 概要
+研究内容は https://chuo-u.repo.nii.ac.jp/?action=pages_view_main&active_action=repository_view_main_item_detail&item_id=16677&item_no=1&page_id=13&block_id=21 を参照すること．
 
 ## dockerセットアップ
 Dockerを用いて仮想コンテナ上で開発環境を実装する．ファインチューニングにgpuを使うので事前に自分のグラボのドライバを入れておくこと．並列計算処理などをするCUDA，cuDNNなどをダウンロードする必要はない．
