@@ -61,7 +61,23 @@ tensorflow, tensorflow-gpu : 1.15.0
 ## 備考
 stylegan2で作った表情モーフィングはかなり不安定ですので，StyleGAN_LatentEditorでのプログラムを推奨する．
 
+## 謝辞
+小林さんから許可をいただいてプログラムを整理して公開させていただきました．本当にありがとうございます．
+
 ## クレジット
-- [StyleGAN_LatentEditor](https://github.com/pacifinapacific/StyleGAN_LatentEditor)
-- [stylegan](https://github.com/NVlabs/stylegan)
-- [stylegan2](https://github.com/NVlabs/stylegan2)
+- StyleGAN_LatentEditor : https://github.com/pacifinapacific/StyleGAN_LatentEditor
+- stylegan : https://github.com/NVlabs/stylegan
+- stylegan2 : https://github.com/NVlabs/stylegan2
+
+## ■ 更新情報
+
+```
+v1.0.0
+・実装完了．公開．
+
+v1.0.1
+・jupyter notebookの修正
+
+v1.0.2
+・LICENSEの継承．
+```
