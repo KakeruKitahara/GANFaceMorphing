@@ -1,7 +1,7 @@
 torch
 torchvision==0.9.1
 requests==2.22.0
-Pillow==6.2.1
+Pillow==9.3.0
 scipy==1.5.4
 tensorflow==1.15.0
 tensorflow-gpu==1.15.0
