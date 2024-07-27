@@ -16,15 +16,17 @@
 |-- image_morphing.py* : 潜在変数でモーフィング
 |-- image_morphing.sh*
 |-- image_rgbtogray.py* : カラーからグレースケール化
+|-- landmarks_detector.py* : module
 |-- main.ipynb* : 本研究のnote
 |-- make_added_morphed_latents.bat*
 |-- make_image.py* : 潜在変数(npy)から画像を復元
 |-- make_image.sh*
 |-- make_morphed_latent.py* : 顔Aと顔Bの中間顔の潜在変数(npy)を作成
 |-- make_morphed_latents.sh*
-|-- make_morphgif.py* : 結合してgif
+|-- make_morphgif.py* : 連番画像をgifに変換
 |-- make_morphing.sh*
 |-- perceptual_model.py* : module
+|-- png2mp4.py : 連番画像をmp4に変換
 |-- read_image.py* : module
 |-- requirements.txt* : パッケージリストを記載しているファイル
 |-- stylegan_layers.py* : module

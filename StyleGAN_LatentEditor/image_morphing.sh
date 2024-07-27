@@ -10,7 +10,7 @@ do
     do
         fname=$(basename ${fpath} .npy)
         lname=$(basename ${lpath} .npy)
-        morph_dir=morph_result/encode_${fname}_${lname}
+        morph_dir=morph_result/${fname}_${lname}
         if [ ! -d $morph_dir ] && [ $fname != $lname ]; then
             echo ${fname}-${lname}
             mkdir $morph_dir

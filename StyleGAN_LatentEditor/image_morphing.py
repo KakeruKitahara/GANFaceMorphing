@@ -46,7 +46,7 @@ def main():
 
 # ここでフレーム数を変更できる．
     itr = 30 # default : 30
-    for i in range(1, itr-1):
+    for i in range(itr):
         alpha = (1/(itr-1))*i
         latents = alpha*latents_0+(1-alpha)*latents_1
 
